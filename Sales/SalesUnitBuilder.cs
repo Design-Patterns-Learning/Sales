@@ -8,7 +8,7 @@
     public interface ISalesMemberBuilder
     {
         public ISalesUnitBuilder WithGroup
-            (Action<SalesGroupBuilder> unitBuilder);
+            (Action<SalesGroupBuilder> groupBuilder);
 
         public ISalesUnitBuilder WithAgent
             (Action<SalesAgentBuilder> agentBuilder);
@@ -20,10 +20,10 @@
         private SalesUnit _unit;
 
         public ISalesUnitBuilder WithGroup
-            (Action<SalesGroupBuilder> unitBuilder)
+            (Action<SalesGroupBuilder> groupBuilder)
         {
             var builder = new SalesGroupBuilder();
-            unitBuilder.Invoke(builder);
+            groupBuilder.Invoke(builder);
 
             _unit = builder.Build();
 
@@ -59,10 +59,10 @@
         }
 
         public SalesGroupBuilder WithMember
-            (Action<SalesAgentBuilder> saleAgentBuilder)
+            (Action<SalesAgentBuilder> agentBuilder)
         {
             var builder = new SalesAgentBuilder();
-            saleAgentBuilder.Invoke(builder);
+            agentBuilder.Invoke(builder);
 
             _units.Add(builder.Build());
 
